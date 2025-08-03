@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sabarinathan | Analyst & Support Engineer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9fafb;
+  color: #1f2937;
+  line-height: 1.6;
+  position: relative;
+}
+
+/* Left and right vertical gradient sidebars */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  width: 80px;
+  height: 100vh;
+  background: linear-gradient(to bottom, #1e40af, #3b82f6);
+  opacity: 0.1;
+  z-index: -1;
+}
+
+body::before {
+  left: 0;
+}
+
+body::after {
+  right: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 100vh;
+  background: linear-gradient(to bottom, #1e40af, #3b82f6);
+  opacity: 0.1;
+  z-index: -1;
+}
+
+/* Right gradient sidebar */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 100vh;
+  background: linear-gradient(to bottom, #1e40af, #3b82f6);
+  opacity: 0.1;
+  z-index: -1;
+}
+
+/* Watermark text as a new fixed element */
+.watermark-text {
+  position: fixed;
+  top: 20%;
+  left: 10px;
+  font-size: 3rem;
+  color: rgba(30, 58, 138, 0.1);
+  writing-mode: vertical-rl;
+  user-select: none;
+  pointer-events: none;
+  font-weight: 700;
+  z-index: 0; /* Above sidebars */
+}
+
+header {
+  background: linear-gradient(135deg, #0f172a, #1e40af);
+  color: white;
+  padding: 4rem 1rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+header::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/cubes.png');
+  opacity: 0.08;
+  z-index: 0;
+}
+header h1 {
+  font-size: 3rem;
+  margin-top: 1rem;
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+header p {
+  font-size: 1.4rem;
+  margin-top: 0.5rem;
+  color: #dbeafe;
+  position: relative;
+  z-index: 1;
+}
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  position: relative;
+  z-index: 1;
+}
+.socials {
+  margin-top: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+.socials a {
+  margin: 0 0.5rem;
+  color: white;
+  font-size: 1.6rem;
+  transition: color 0.3s ease;
+}
+.socials a:hover {
+  color: #fbbf24;
+}
+.socials .button {
+  display: inline-block;
+  background: #1e3a8a;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+.socials .button:hover {
+  background: #f59e0b;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  background: #f8fafc;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+nav a {
+  text-decoration: none;
+  color: #1e293b;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+nav a:hover {
+  color: #2563eb;
+}
+section {
+  padding: 4rem 1rem;
+  max-width: 960px;
+  margin: auto;
+}
+section:nth-child(even) {
+  background: #f1f5f9;
+}
+section h2 {
+  font-size: 2.4rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid #0f172a;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  color: #0f172a;
+}
+ul {
+  padding-left: 1.5rem;
+}
+li {
+  margin-bottom: 0.5rem;
+}
+.skills-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.skills-logos img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 8px;
+}.projects-grid {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-behavior: smooth;
+
+  /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+.projects-grid::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+.project-card {
+  flex: 0 0 400px; /* fixed width so cards don’t shrink */
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+}
+.project-card:hover {
+  transform: translateY(-5px);
+  background: #e0f2fe;
+}
+.project-card img {
+  width: 100%;
+  height: 200px;
+  /* fixed height */
+  object-fit: cover;
+  /* maintain aspect ratio, crop if needed */
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.project-title {
+  font-size: 1.2rem;
+  margin-top: 0.7rem;
+  font-weight: 600;
+  color: #1e3a8a;
+  text-align: center;
+  /* center text under image */
+  flex-grow: 1;
+  /* take remaining space so all cards align */
+  display: flex;
+  align-items: center;
+  /* vertically center title text */
+  justify-content: center;
+  padding: 0 0.5rem;
+  /* some horizontal padding */
+}
+.button {
+  display: inline-block;
+  background: #1e3a8a;
+  color: white;
+  padding: 0.7rem 1.4rem;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 1rem;
+  transition: background 0.3s ease;
+}
+.button:hover {
+  background: #f59e0b;
+}
+input,
+textarea {
+  border: 1px solid #94a3b8;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: #fff;
+  padding: 0.8rem;
+}
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: #1e293b;
+  color: white;
+  font-size: 0.95rem;
+}
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 1120px) {
+body::before,
+  body::after {
+    display: none;
+  }
+}
+</style>
+</head>
+<body>
+  <header>
+    <img src="assets/Media.jpg" class="avatar" alt="Your Avatar">
+    <h1>Hi There, I'm Sabarinathan</h1>
+    <p>Analyst & Technical Support Engineer</p>
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/sabarinathan-t-317b120a" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+      <br>
+      <a href="assets/Sabarinathan-T.pdf" class="button" download><i class="fas fa-download" style="margin-right: 6px;"></i>Resume</a>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>I'm a Data Analyst with a keen eye for detail and a strong background in Technical Product Support and Data Analysis within the Ad Tech ecosystem.<BR><BR>
+With over 10 months of experience supporting Microsoft’s Invest & Monetize (formerly Xandr) platform, I specialize in identifying and resolving complex campaign delivery issues, analyzing log-level data, and validating tag implementations. My work involves close collaboration with cross-functional teams and external partners, including SSPs and DSPs, to ensure seamless operations and drive campaign performance.<BR><BR>
+Before that, I completed a 6-month AI/ML internship, where I gained hands-on experience in Python, data modeling, and workflow automation. I'm proficient in SQL (MySQL) and Power BI, and I enjoy turning raw data into clear, actionable insights that inform strategic decisions.<BR><BR>
+Passionate about programmatic advertising, I thrive in fast-paced environments and continuously seek opportunities to grow in the dynamic world of digital media and analytics.</p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li><strong>Languages:</strong> Python, SQL, HTML, JavaScript (Basic)</li>
+      <li><strong>Databases:</strong> MySQL, PostgreSQL</li>
+      <li><strong>Data Visualization:</strong> Power BI, Excel</li>
+      <li><strong>Tools:</strong> Bruno, DBeaver, Postman, Miro, Azure DevOps</li>
+      <li><strong>Ticketing Tools:</strong> Jira, Salesforce, UCMT</li>
+    </ul>
+    <div class="skills-logos">
+      <img src="assets\python.png" alt="Python">
+      <img src="assets\sql.jpg" alt="SQL">
+      <img src="assets\powerbi.jpg" alt="Power BI">
+      <img src="assets\excel.jpg" alt="Excel">
+      <img src="assets\html.jpg" alt="HTML">
+      <img src="assets\js.jpg" alt="JavaScript">
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <p><strong>Analyst - Aceloution INC (Present)</strong><BR><br>• Resolved 450+ tickets on Microsoft Xandr platform with 98% SLA<br>• Collaborated with technical teams and clients<br>• Delivered insights using real-time data analysis to boost campaign performance</p>
+   <BR><p><strong>AI/ML Intern - Probeseven BetterLives</strong><BR><br>• Built chatbot for Invybot using Flask<br>• Created REST APIs and backend logic<br>• Conducted client demos and KPI dashboards in Power BI</p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card" onclick="location.href='project1.html'">
+        <img src="assets\xandr.jpg" alt="Xandr Project">
+        <p class="project-title">Invest & Monetize</p>
+      </div>
+      <div class="project-card" onclick="location.href='project2.html'">
+        <img src="assets\callcenter.jpeg" alt="Chatbot Project">
+        <p class="project-title">Call Center Data Analysis</p>
+      </div>
+      <div class="project-card" onclick="location.href='project2.html'">
+        <img src="assets\callcenter.jpeg" alt="Chatbot Project">
+        <p class="project-title">Call Center Data Analysis</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:2rem;">
+      <a href="https://github.com/yourusername" class="button" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <p><strong>B.Tech in Information Technology</strong><br>Dr. N. G. P. Institute Of Technology (Anna University)<br>2020 - 2024 | CGPA: 8.44</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <form id="contactForm">
+      <input type="text" placeholder="Your Name" required style="width:100%;margin-bottom:1rem;padding:0.8rem;">
+      <input type="email" placeholder="Your Email" required style="width:100%;margin-bottom:1rem;padding:0.8rem;">
+      <textarea placeholder="Your Message" required style="width:100%;padding:0.8rem;height:120px;"></textarea>
+      <button type="submit" class="button">Send</button>
+    </form>
+    <p style="margin-top:1rem;">Email: sabarinathant2024@gmail.com</p>
+  </section>
+
+  <footer>
+    © 2025 Sabarinathan. All rights reserved.
+  </footer>
+
+    <script>
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = this.querySelector('input[type=text]').value;
+      const email = this.querySelector('input[type=email]').value;
+      const message = this.querySelector('textarea').value;
+      window.location.href = `mailto:sabarinathant2024@gmail.com?subject=Contact from ${name}&body=Email: ${email}%0D%0A%0D%0A${message}`;
+    });
+  </script>
+</body>
+</html>
