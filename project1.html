@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,52 +15,86 @@
       color: #1e293b;
       line-height: 1.6;
     }
+
     header {
       background: #1e3a8a;
       color: white;
       padding: 2rem;
       text-align: center;
     }
+
     header h1 {
       margin: 0;
       font-size: 2.5rem;
     }
+
     .container {
       max-width: 900px;
       margin: 2rem auto;
       padding: 1rem;
       background: white;
       border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
+
     img {
       width: 100%;
       border-radius: 10px;
       margin-bottom: 1.5rem;
     }
+
     h2 {
       color: #1e3a8a;
       margin-bottom: 1rem;
     }
+
     ul {
       margin: 1rem 0;
       padding-left: 1.2rem;
     }
+
     li {
       margin-bottom: 0.7rem;
     }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+      max-width: 100%;
+    }
+
     .button {
       display: inline-block;
       background: #1e3a8a;
       color: white;
-      padding: 0.7rem 1.4rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.95rem;
       border-radius: 6px;
       text-decoration: none;
       transition: background 0.3s ease;
+      white-space: nowrap;
+      max-width: 100%;
+      box-sizing: border-box;
     }
+
     .button:hover {
       background: #f59e0b;
     }
+
+    @media (max-width: 600px) {
+      .button-group {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
     footer {
       text-align: center;
       padding: 2rem;
@@ -68,6 +103,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <h1>Xandr Support & Optimization</h1>
@@ -75,7 +111,9 @@
   <div class="container">
     <img src="assets/xandr.jpg" alt="Xandr Screenshot">
     <h2>Overview</h2>
-    <p>This project highlights my role as an Analyst at Aceloution Inc, where I supported Microsoft's Invest & Monetize platform (formerly Xandr). I specialized in client-side technical support, data investigation, and campaign performance optimization.</p>
+    <p>This project highlights my role as an Analyst at Aceloution Inc, where I supported Microsoft's Invest & Monetize
+      platform (formerly Xandr). I specialized in client-side technical support, data investigation, and campaign
+      performance optimization.</p>
     <h2>Responsibilities</h2>
     <ul>
       <li>Resolved over 450 support tickets with a 98% SLA compliance rate.</li>
@@ -84,12 +122,13 @@
       <li>Monitored tag implementation, cookie syncing, and creative troubleshooting.</li>
       <li>Provided actionable insights to improve delivery and fill rates for programmatic campaigns.</li>
     </ul>
-    <a href="index.html" class="button">← Back to Portfolio</a>
-    <a href="https://github.com/Sabarinathan19" target="_blank" class="button" style="margin-left: 1rem;"><i class="fab fa-github"></i> View on GitHub</a>
+    <div class="button-group">
+      <a href="index.html" class="button">← Back to Portfolio</a>
+    </div>
   </div>
   <footer>
     © 2025 Sabarinathan. All rights reserved.
   </footer>
 </body>
-</html>
 
+</html>
