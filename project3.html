@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 3 | Employee Attrition Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #1e3a8a;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      color: #1e3a8a;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      margin: 1rem 0;
+      padding-left: 1.2rem;
+    }
+
+    li {
+      margin-bottom: 0.7rem;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+      max-width: 100%;
+    }
+
+    .button {
+      display: inline-block;
+      background: #1e3a8a;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.95rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      white-space: nowrap;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .button:hover {
+      background: #f59e0b;
+    }
+
+    @media (max-width: 600px) {
+      .button-group {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+footer {
+      text-align: center;
+      padding: 2rem;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Call Center Data Analysis</h1>
+  </header>
+  <div class="container">
+  <img src="assets/project3.png" alt="Employee Attrition Dashboard Screenshot" />
+  
+  <h2>Overview</h2>
+  <p>
+    Designed and developed an <b>Employee Attrition Analysis Dashboard</b> using Excel to explore 
+    patterns behind employee exits. The project focuses on identifying key drivers of attrition, 
+    analyzing workforce distribution, and providing actionable insights for HR decision-making.
+  </p>
+
+  <h2>Tools & Technologies Used</h2>
+  <ul>
+    <li>Microsoft Excel (Power Query, Pivot Tables, Charts, Formulas)</li>
+    <li>Excel Dashboarding Techniques</li>
+    <li>Data Cleaning & Preprocessing with Power Query</li>
+    <li>KPI-based Reporting & Visualization</li>
+  </ul>
+
+  <h2>Objectives</h2>
+  <ul>
+    <li>Identify key reasons behind employee attrition.</li>
+    <li>Analyze workforce distribution across departments, roles, and demographics.</li>
+    <li>Highlight KPIs such as average job satisfaction, work-life balance, salary, and tenure.</li>
+    <li>Provide slicer-based interactive filtering to support HR in making data-driven decisions.</li>
+  </ul>
+
+  <h2>Key Performance Indicators (KPIs)</h2>
+  <ul>
+    <li>Total Headcount</li>
+    <li>Average Job Satisfaction</li>
+    <li>Average Work-Life Balance</li>
+    <li>Average Salary</li>
+    <li>Average Tenure (Years at Company)</li>
+  </ul>
+  <p>
+    Each KPI is interactive and <b>connected to a department slicer</b> for drill-down analysis.
+  </p>
+
+  <h2>Summary Insights</h2>
+  <ul>
+    <li>Summary of total attrition by role with headcounts.</li>
+    <li>Summary of total attrition by distance (Near, Commutable, Long Distance).</li>
+  </ul>
+
+  <h2>Charts & Visualizations</h2>
+  <ul>
+    <li>📌 <b>Donut Chart</b> – Distribution of <i>Reasons for Leaving</i> (not connected to slicer).</li>
+    <li>📌 <b>Bar Chart</b> – Percentage of attrition by <i>Gender</i> (connected to slicer).</li>
+    <li>📌 <b>100% Stacked Chart</b> – <i>Reasons for Leaving</i> vs <i>Promotion Count</i> (not connected to slicer).</li>
+    <li>📌 <b>Line Chart with Markers</b> – <i>Active vs Underperformer</i> attrition reasons (connected to slicer).</li>
+    <li>📌 <b>Bar Chart</b> – <i>Years at Company</i> vs <i>Reason for Leaving</i> (connected to slicer).</li>
+  </ul>
+
+  <h2>Slicer</h2>
+  <p>
+    <b>Department</b> slicer is implemented to filter all KPIs and selected charts for 
+    department-wise insights.
+  </p>
+
+  <h2>Impact & Takeaways</h2>
+  <ul>
+    <li>Helped identify hidden patterns behind employee exits across roles and departments.</li>
+    <li>Strengthened HR analytics and dashboard design skills in Excel.</li>
+    <li>Developed an interactive attrition explorer with slicer-driven insights.</li>
+  </ul>
+
+  <div class="button-group">
+    <a href="index.html" class="button">← Back to Portfolio</a>
+    <a href="https://github.com/Sabarinathan19" target="_blank" class="button">
+      <i class="fab fa-github"></i> View on GitHub
+    </a>
+  </div>
+  </div>
+  <footer>
+    © 2025 Sabarinathan. All rights reserved.
+  </footer>
+</body>
+
+</html>
