@@ -44,13 +44,12 @@
       z-index: 9999;
     }
 
-    /* ── GRID BG ── */
+    /* ── AMBIENT BG (replaces grid) ── */
     .grid-bg {
       position: fixed; inset: 0;
-      background-image:
-        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 20%, rgba(0,212,255,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(124,92,252,0.04) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
@@ -106,7 +105,7 @@
       gap: 4rem;
     }
 
-    .hero-content { flex: 1; }
+    .hero-content { flex: 1; min-width: 0; }
 
     .hero-badge {
       display: inline-flex;
@@ -135,12 +134,13 @@
 
     .hero h1 {
       font-family: var(--font-head);
-      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-size: clamp(2.2rem, 5vw, 5.5rem);
       font-weight: 800;
-      line-height: 1.0;
+      line-height: 1.05;
       letter-spacing: -0.03em;
       margin-bottom: 1.5rem;
       animation: fadeUp 0.6s 0.1s ease both;
+      word-break: break-word;
     }
 
     .hero h1 .line2 {
@@ -237,8 +237,19 @@
 
     /* Hero avatar panel */
     .hero-visual {
-      flex: 0 0 320px;
+      flex: 0 0 360px;
       animation: fadeUp 0.6s 0.2s ease both;
+      position: relative;
+    }
+
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: -30px;
+      background: radial-gradient(ellipse at center, rgba(0,212,255,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
     }
 
     .avatar-card {
@@ -251,10 +262,10 @@
 
     .avatar-card img {
       width: 100%;
-      height: 380px;
+      height: 420px;
       object-fit: cover;
       display: block;
-      filter: saturate(0.8);
+      filter: saturate(0.85);
     }
 
     .avatar-card::after {
@@ -327,11 +338,12 @@
 
     .section-title {
       font-family: var(--font-head);
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(1.6rem, 3.5vw, 3rem);
       font-weight: 800;
       letter-spacing: -0.03em;
-      line-height: 1.1;
+      line-height: 1.15;
       margin-bottom: 3rem;
+      word-break: break-word;
     }
 
     .divider {
@@ -763,24 +775,120 @@
       50% { opacity: 0.4; }
     }
 
+    /* ── MOBILE MENU BUTTON ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      transition: border-color 0.2s;
+    }
+
+    .nav-hamburger:hover { border-color: var(--accent); }
+
+    .nav-hamburger span {
+      display: block;
+      width: 20px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── MOBILE DROPDOWN MENU ── */
+    .nav-dropdown {
+      display: none;
+      position: fixed;
+      top: 62px; left: 0; right: 0;
+      background: rgba(8,12,16,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+      padding: 1rem 1.5rem;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .nav-dropdown.open { display: flex; }
+
+    .nav-dropdown a {
+      display: block;
+      padding: 0.85rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-dropdown a:hover {
+      color: var(--accent);
+      background: rgba(0,212,255,0.05);
+    }
+
+    /* ── BACK TO TOP ── */
+    #back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.5rem;
+      width: 44px; height: 44px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      box-shadow: 0 4px 20px rgba(0,212,255,0.35);
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    #back-to-top:hover { transform: translateY(-3px); }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
-      .hero { flex-direction: column; padding: 7rem 1.5rem 3rem; gap: 2.5rem; }
-      .hero-visual { flex: none; width: 100%; max-width: 320px; }
+      .nav-hamburger { display: flex; }
+      .hero {
+        flex-direction: column-reverse;
+        padding: 5.5rem 1.25rem 3rem;
+        gap: 2rem;
+        min-height: auto;
+        padding-top: 5rem;
+      }
+      .hero-visual { flex: none; width: 100%; max-width: 280px; margin: 0 auto; }
       .about-grid { grid-template-columns: 1fr; }
       .contact-wrap { grid-template-columns: 1fr; }
-      .section { padding: 4rem 1.5rem; }
-      .divider { margin: 0 1.5rem; }
+      .section { padding: 4rem 1.25rem; }
+      .divider { margin: 0 1.25rem; }
       footer { flex-direction: column; gap: 1rem; padding: 1.5rem; }
       .exp-header { flex-wrap: wrap; }
       .exp-period { margin-left: 0; }
     }
 
     @media (max-width: 500px) {
-      .hero h1 { font-size: 2.5rem; }
+      .hero h1 { font-size: clamp(1.9rem, 8vw, 2.5rem); }
       .projects-grid { grid-template-columns: 1fr; }
+      nav { padding: 0.9rem 1rem; }
     }
   </style>
 </head>
@@ -790,7 +898,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">SABA<span>.</span></a>
+    <a href="#" class="nav-logo">ST<span>.</span></a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -799,7 +907,25 @@
       <li><a href="#education">Education</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE DROPDOWN -->
+  <div class="nav-dropdown" id="navDropdown">
+    <a href="#about" class="nav-drop-link">About</a>
+    <a href="#skills" class="nav-drop-link">Skills</a>
+    <a href="#experience" class="nav-drop-link">Experience</a>
+    <a href="#projects" class="nav-drop-link">Projects</a>
+    <a href="#education" class="nav-drop-link">Education</a>
+    <a href="#contact" class="nav-drop-link">Contact</a>
+  </div>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
 
   <!-- HERO -->
   <section class="hero">
@@ -810,7 +936,7 @@
         <span class="line2">Analyst & Support</span>
       </h1>
       <p class="hero-desc">
-        Technical Support Engineer & Data Analyst with expertise in Ad Tech, programmatic advertising, and data-driven insights. Currently supporting ThoughtSpot & Analyst Studio platform.
+        Technical Support Engineer & Data Analyst with expertise in Ad Tech, programmatic advertising, and data-driven insights. Currently supporting Microsoft's Xandr Invest & Monetize platform.
       </p>
       <div class="hero-ctas">
         <a href="assets/SABARINATHAN--T.pdf" class="btn-primary" download>
@@ -993,11 +1119,10 @@
         <div class="exp-header">
           <img src="assets/thoughtspot_logo.jpg" alt="ThoughtSpot" class="exp-logo">
           <div class="exp-meta">
-            <div class="exp-role">CSA-l</div>
+            <div class="exp-role">CSA - l</div>
             <div class="exp-company">ThoughtSpot INC</div>
           </div>
           <span class="exp-period">Dec 2025 – Present</span>
-        </div>
         </div>
       <div class="exp-item">
         <div class="exp-header">
@@ -1128,7 +1253,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <span class="footer-copy">© 2025 Sabarinathan T. All rights reserved.</span>
+    <span class="footer-copy">© 2026 Sabarinathan T. All rights reserved.</span>
     <div class="footer-socials">
       <a href="https://www.linkedin.com/in/sabarinathan-t-3167b120a" target="_blank" class="social-link">
         <i class="fab fa-linkedin-in"></i>
@@ -1140,12 +1265,44 @@
   </footer>
 
   <script>
+    // Contact form
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const name = this.querySelector('input[type=text]').value;
       const email = this.querySelector('input[type=email]').value;
       const message = this.querySelector('textarea').value;
       window.location.href = `mailto:sabarinathant2024@gmail.com?subject=Contact from ${encodeURIComponent(name)}&body=Email: ${encodeURIComponent(email)}%0D%0A%0D%0A${encodeURIComponent(message)}`;
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navDropdown = document.getElementById('navDropdown');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navDropdown.classList.toggle('open');
+    });
+
+    // Close dropdown on link click
+    document.querySelectorAll('.nav-drop-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navDropdown.classList.remove('open');
+      });
+    });
+
+    // Back to top button
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // Scroll reveal
