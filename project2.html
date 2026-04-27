@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Call Center Data Analysis — Sabarinathan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #080c10; --surface: #0d1117; --surface2: #111820;
+      --border: rgba(255,255,255,0.07); --accent: #00d4ff; --accent2: #7c5cfc;
+      --text: #e8edf3; --muted: #6b7688;
+      --font-head: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.7; }
+    .grid-bg { position: fixed; inset: 0; background-image: linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+    nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; background: rgba(8,12,16,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: var(--font-head); font-weight: 800; font-size: 1.1rem; color: var(--text); text-decoration: none; }
+    .nav-logo span { color: var(--accent); }
+    .btn-back { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--muted); font-family: var(--font-body); font-weight: 500; font-size: 0.85rem; padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid var(--border); text-decoration: none; transition: all 0.2s; }
+    .btn-back:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-project { position: relative; z-index: 1; padding: 4rem 3rem 3rem; max-width: 1000px; margin: 0 auto; }
+    .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb span { margin: 0 0.5rem; }
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .tag { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); color: var(--accent); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.8rem; border-radius: 100px; }
+    h1 { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1rem; }
+    .project-lead { font-size: 1rem; color: var(--muted); max-width: 640px; font-weight: 300; }
+    .project-banner { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 0 3rem; }
+    .project-banner img { width: 100%; border-radius: 16px; border: 1px solid var(--border); filter: brightness(0.85) saturate(0.8); display: block; }
+    .content { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 3rem; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; text-align: center; }
+    .kpi-card .kpi-icon { font-size: 1.4rem; color: var(--accent); margin-bottom: 0.5rem; }
+    .kpi-card .kpi-name { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; }
+    .kpi-card .kpi-abbr { font-size: 0.68rem; color: var(--muted); margin-top: 0.2rem; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+    .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; }
+    .info-card h3 { font-family: var(--font-head); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1rem; }
+    h2 { font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; margin: 2rem 0 1rem; letter-spacing: -0.01em; }
+    p { color: rgba(232,237,243,0.75); font-weight: 300; margin-bottom: 1rem; }
+    ul { padding-left: 0; list-style: none; margin-bottom: 1rem; }
+    ul li { color: rgba(232,237,243,0.75); font-weight: 300; font-size: 0.93rem; padding: 0.4rem 0 0.4rem 1.4rem; position: relative; border-bottom: 1px solid var(--border); }
+    ul li:last-child { border-bottom: none; }
+    ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.75rem; top: 0.5rem; }
+    .tool-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tool-chip { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.35rem 0.8rem; font-size: 0.8rem; color: rgba(232,237,243,0.7); }
+    .btn-set { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #000; font-family: var(--font-body); font-weight: 600; font-size: 0.9rem; padding: 0.75rem 1.6rem; border-radius: 8px; text-decoration: none; transition: all 0.2s; }
+    .btn-primary:hover { background: #fff; transform: translateY(-2px); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--text); font-family: var(--font-body); font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.6rem; border-radius: 8px; border: 1px solid var(--border); text-decoration: none; transition: all 0.2s; }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    footer { border-top: 1px solid var(--border); padding: 2rem 3rem; text-align: center; font-size: 0.85rem; color: var(--muted); position: relative; z-index: 1; }
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      .hero-project, .project-banner, .content { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">SABA<span>.</span></a>
+    <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+  </nav>
+  <div class="hero-project">
+    <div class="breadcrumb"><a href="index.html">Portfolio</a><span>/</span> Projects <span>/</span> Call Center Analysis</div>
+    <div class="project-tags"><span class="tag">Data Analysis</span><span class="tag">Excel</span><span class="tag">Dashboard</span></div>
+    <h1>Call Center<br>Data Analysis</h1>
+    <p class="project-lead">Analyzed a real-world call center dataset to evaluate performance metrics, identify bottlenecks, and deliver actionable operational insights using Excel and Power Query.</p>
+  </div>
+  <div class="project-banner"><img src="assets/project2.png" alt="Call Center Dashboard"></div>
+  <div class="content">
+    <h2>Overview</h2>
+    <p>Analyzed a real-world call center dataset sourced from Kaggle to evaluate performance metrics, identify bottlenecks, and deliver actionable insights for operational improvement. This project simulates a data analyst's role in optimizing customer support operations.</p>
+
+    <h2>Key Performance Indicators</h2>
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-clock"></i></div><div class="kpi-name">Avg Handle Time</div><div class="kpi-abbr">AHT</div></div>
+      <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-check-circle"></i></div><div class="kpi-name">First Call Resolution</div><div class="kpi-abbr">FCR</div></div>
+      <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-phone-slash"></i></div><div class="kpi-name">Abandonment Rate</div><div class="kpi-abbr">CAR</div></div>
+      <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-star"></i></div><div class="kpi-name">Customer Satisfaction</div><div class="kpi-abbr">CSAT</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h3>Project Highlights</h3>
+        <ul>
+          <li>Used Power Query to clean and transform large volumes of raw data</li>
+          <li>Built dynamic dashboards to visualize performance across departments and agents</li>
+          <li>Implemented Pivot Tables and advanced Excel formulas (VLOOKUP, FILTER, XLOOKUP)</li>
+          <li>Created KPI cards and charts for executive-level reporting</li>
+          <li>Generated time-based comparisons (monthly, quarterly) to monitor productivity</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Impact & Takeaways</h3>
+        <ul>
+          <li>Demonstrated ability to handle real-world business data at scale</li>
+          <li>Strengthened Excel and data visualization skills for analyst roles</li>
+          <li>Practiced simulating data-driven decision-making for support operations</li>
+          <li>Communicated insights effectively to a non-technical audience</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Tools & Technologies</h2>
+    <div class="tool-grid">
+      <span class="tool-chip">Microsoft Excel</span>
+      <span class="tool-chip">Power Query</span>
+      <span class="tool-chip">Pivot Tables</span>
+      <span class="tool-chip">VLOOKUP / XLOOKUP</span>
+      <span class="tool-chip">Dashboard Design</span>
+      <span class="tool-chip">KPI Reporting</span>
+    </div>
+
+    <div class="btn-set">
+      <a href="index.html" class="btn-primary"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+      <a href="https://github.com/Sabarinathan19" target="_blank" class="btn-ghost"><i class="fab fa-github"></i> View on GitHub</a>
+    </div>
+  </div>
+  <footer>© 2025 Sabarinathan T. All rights reserved.</footer>
+</body>
+</html>
